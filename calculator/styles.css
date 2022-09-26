@@ -1,0 +1,27 @@
+
+body {
+    
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+#input-area {
+    width: 235px;
+    height: 50px;
+    margin: 5px;
+}
+
+#clear-btn {
+    width: 240px;
+    margin: 5px;
+}
+
+.btn {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    display: inline-block;
+}
