@@ -1,27 +1,49 @@
 
 body {
-    
+    background-color: rgb(163, 202, 189);
+    text-align: center;
 }
 
 .container {
     display: flex;
     flex-direction: column;
+    margin: 100px auto;
 }
 
+p {
+    color: #fff;
+}
+
+#name {
+    color: #fff;
+}
 #input-area {
     width: 235px;
     height: 50px;
-    margin: 5px;
+    margin: 5px auto;
+    border: none;
+    border-radius: 5px;
 }
 
 #clear-btn {
     width: 240px;
-    margin: 5px;
+    height: 30px;
+    margin: 5px auto;
 }
 
 .btn {
     width: 50px;
     height: 50px;
     margin: 5px;
+    border-radius: 5px;
+    border: none;
     display: inline-block;
+}
+
+.btn:hover {
+    background-color: rgb(223, 226, 225);
+}
+
+.btn:active {
+    background-color: rgb(174, 218, 203);
 }
