@@ -4,6 +4,7 @@ let textBox = document.querySelector("input");
 let input = "";
 
 let numbers = [];
+let operators = [];
 let number = 0.0;
 
 let currentOperator = null;
@@ -37,6 +38,7 @@ function hundleInput(clicked){
 function clearTextBox(){
     textBox.value = "";
     numbers.length = 0;
+    operators.length = 0;
     number = 0.0;
     input = "";
 }
@@ -46,30 +48,36 @@ function hundleOperation(operand){
     number = 0.0;
     input = "";
     textBox.value = operand;
-    currentOperator = operand;
+    // currentOperator = operand;
+    operators.push(operand);
 }
 
 function calculate(){
     console.log("calculating");
-    let result = 0;
+    let result = numbers[0];
     numbers.push(number);
-    switch(currentOperator){
-        case '+':
-            result = numbers[0] + numbers[1];
-            break;
-        case '-':
-            result = numbers[0] - numbers[1];
-            break;
-        case '*':
-            result = numbers[0] * numbers[1];
-            break;
-        case '/':
-            result = numbers[0] / numbers[1];
-            break;
+
+    for(let i=0; i<operators.length; i++){
+        currentOperator = operators[i];
+        number = numbers[i+1];
+        
+        switch(currentOperator){
+            case '+':
+                result += number;
+                break;
+            case '-':
+                result -= number;
+                break;
+            case '*':
+                result *= number;
+                break;
+            case '/':
+                result /= number;
+                break;
+        }
     }
     clearTextBox();
     textBox.value = result.toString();
-    console.log(result);
 }
 
 
