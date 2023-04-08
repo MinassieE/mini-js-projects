@@ -1,4 +1,4 @@
-// alert("hello");
+
 let buttons = document.querySelectorAll('.btn');
 let textBox = document.querySelector("input");
 let input = "";
