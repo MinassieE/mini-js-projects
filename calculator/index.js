@@ -76,8 +76,16 @@ function calculate(){
                 break;
         }
     }
-    clearTextBox();
+    // clearTextBox();
+    
+    input = "";
+    textBox.value = "";
+    numbers.length = 0;
+    operators.length = 0;
+
+    numbers.push(result);
     textBox.value = result.toString();
+    result = numbers[0];
 }
 
 
