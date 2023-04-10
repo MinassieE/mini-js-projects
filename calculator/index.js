@@ -1,14 +1,23 @@
-
+//access the html elements (DOM)
 let buttons = document.querySelectorAll('.btn');
 let textBox = document.querySelector("input");
+
+//variable to store and concatinate the user input
 let input = "";
 
+//stacks for storing and handling precedence
 let numbers = [];
 let operators = [];
-let number = 0.0;
 
+
+let number = 0.0;
 let currentOperator = null;
 
+// flag to check if their is a continuing number from previous calculation
+let fromPrevious = false;
+
+//this for loop adds an event listner on our button
+//and it calls certain function based on the buttons that are touched
 for(let i=0; i<buttons.length; i++){
     buttons[i].addEventListener('click', function (){
         let clicked = this.innerText;
@@ -28,6 +37,8 @@ for(let i=0; i<buttons.length; i++){
     })
 }
 
+//this function is called when ever a "number button" is pressed
+// it hundles the number that the user enters
 function hundleInput(clicked){
     input += clicked;
     textBox.value = input;
@@ -35,57 +46,62 @@ function hundleInput(clicked){
     number = parseFloat(input);
 }
 
+// called when "clear" button is touched
+// it clears all the neccessary variables
 function clearTextBox(){
     textBox.value = "";
     numbers.length = 0;
     operators.length = 0;
     number = 0.0;
     input = "";
+    fromPrevious = false;
 }
 
+// called when an "operator" is entered
+// handles the operator storage and the precedence
 function hundleOperation(operand){
-    numbers.push(number);
+    if(!fromPrevious){
+        numbers.push(number);
+    }
     number = 0.0;
     input = "";
     textBox.value = operand;
-    // currentOperator = operand;
     operators.push(operand);
+    fromPrevious = false;
 }
 
+// called when user enters "equal sign"
+// performs all the calculation based on the operaror and numbers stack
 function calculate(){
-    console.log("calculating");
     let result = numbers[0];
+    let num;
     numbers.push(number);
 
     for(let i=0; i<operators.length; i++){
         currentOperator = operators[i];
-        number = numbers[i+1];
+        num = numbers[i+1];
         
         switch(currentOperator){
             case '+':
-                result += number;
+                result += num;
                 break;
             case '-':
-                result -= number;
+                result -= num;
                 break;
             case '*':
-                result *= number;
+                result *= num;
                 break;
             case '/':
-                result /= number;
+                result /= num;
                 break;
         }
     }
-    // clearTextBox();
+    clearTextBox();
     
-    input = "";
-    textBox.value = "";
-    numbers.length = 0;
-    operators.length = 0;
-
+    // stores the final result in the numbers array, incase the user wants to use it (in the immediate next calculation)
     numbers.push(result);
+    fromPrevious = true;
     textBox.value = result.toString();
-    result = numbers[0];
 }
 
 
